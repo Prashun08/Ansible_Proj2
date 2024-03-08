@@ -1,0 +1,16 @@
+---
+- name: Create EC2 Instance with Key Pair and Security Group
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: "Create a Webserver"
+      ec2_instance:
+        name: Webserver
+        key_name: serverkey
+        instance_type: t2.micro
+        image_id: ami-0df2a11dd1fe1f8e3
+        region: us-east-1               
+        security_group: sg-0547c4010506efe5b
+        wait: True
+        exact_count: 1

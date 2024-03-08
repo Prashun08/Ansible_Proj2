@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: False
+- name: Create Key Pair
+  ansible.builtin.import_playbook: create_key.yaml
+- name: Launch Webserver
+  ansible.builtin.import_playbook: launch_instance.yaml

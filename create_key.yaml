@@ -1,0 +1,16 @@
+- hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create Key Pair
+      ec2_key:
+        name: serverkey
+        region: us-east-1
+      register: keyout
+    - name: Print the key
+      debug:
+        var: keyout
+    - name: Save the key
+      copy:
+        content: "{{ keyout.key.private_key }}"
+        dest: ./serverkey.pem
+      when: keyout.changed == True
